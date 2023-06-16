@@ -59,7 +59,7 @@ describe("Todos API", () => {
       });
   });
 
-  it("GET /todos --> validates request body", () => {
+  it("POST /todos --> validates request body", () => {
     return request(app).post("/todos").send({ name: 123 }).expect(422);
   });
 

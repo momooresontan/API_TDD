@@ -21,8 +21,12 @@ router.get("/:id", function (req, res, next) {
 router.post("/", function (req, res, next) {
   const { body } = req;
 
+  if (typeof body.name !== "string") {
+    return next(createError(422, "Validation Error"));
+  }
+
   const newTodo = {
-    id: todo.length + 1,
+    id: todos.length + 1,
     name: body.name,
     completed: false,
   };
@@ -30,6 +34,10 @@ router.post("/", function (req, res, next) {
   todos.push(newTodo);
 
   res.status(201).json(newTodo);
+});
+
+router.patch("/:id", function (req, res) {
+  const foundTodo = todos.find((todo) => todo.id === Number(req.params.id));
 });
 
 module.exports = router;
