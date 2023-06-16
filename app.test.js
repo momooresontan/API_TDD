@@ -38,11 +38,29 @@ describe("Todos API", () => {
     return request(app).get("/todos/99999").expect(404);
   });
 
-  it("POST /todos --> created todo", () => {});
+  it("POST /todos --> created todo", () => {
+    return request(app)
+      .post("/todos")
+      .send({
+        name: "do dishes",
+      })
+      .expect("Content-Type", /json/)
+      .expect(201)
+      .then((response) => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            name: "do dishes",
+            completed: false,
+          })
+        );
+      });
+  });
 
   it("GET /todos --> validates request body", () => {});
 
   it("PATCH /todos/:id --> updated todo", () => {});
+
+  it("PATCH /todos/:id --> validates request body", () => {});
 
   it("PATCH /todos/:id --> 404 if not found", () => {});
 
