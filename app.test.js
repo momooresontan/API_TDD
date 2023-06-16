@@ -64,7 +64,7 @@ describe("Todos API", () => {
 
   it("PATCH /todos/:id --> updated todo", () => {
     return request(app)
-      .patch("/todos/1")
+      .patch("/todos/")
       .send({
         name: "do laundry",
       })
