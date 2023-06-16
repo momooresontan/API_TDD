@@ -64,7 +64,7 @@ router.delete("/:id", function (req, res, next) {
   const index = todos.indexOf(foundTodo);
   todos.splice(index, 1);
 
-  res.status(204);
+  res.status(204).json(todos);
 });
 
 module.exports = router;
