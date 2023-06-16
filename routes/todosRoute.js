@@ -57,7 +57,14 @@ router.patch("/:id", function (req, res, next) {
 router.delete("/:id", function (req, res, next) {
   let foundTodo = todos.find((todo) => todo.id === Number(req.params.id));
 
-  const index = todos.ind;
+  if (!foundTodo) {
+    return next(createError(404, "Not Found"));
+  }
+
+  const index = todos.indexOf(foundTodo);
+  todos.splice(index, 1);
+
+  res.status(204);
 });
 
 module.exports = router;
