@@ -56,11 +56,31 @@ describe("Todos API", () => {
       });
   });
 
-  it("GET /todos --> validates request body", () => {});
+  it("GET /todos --> validates request body", () => {
+    return request(app).post("/todos").send({ name: 123 }).expect(422);
+  });
 
-  it("PATCH /todos/:id --> updated todo", () => {});
+  it("PATCH /todos/:id --> updated todo", () => {
+    return request(app)
+      .patch("/todos/1")
+      .send({
+        name: "do laundry",
+      })
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            name: "do laundry",
+            completed: expect.any(Boolean),
+          })
+        );
+      });
+  });
 
-  it("PATCH /todos/:id --> validates request body", () => {});
+  it("PATCH /todos/:id --> validates request body", () => {
+    return request(app).patch("/todos/1");
+  });
 
   it("PATCH /todos/:id --> 404 if not found", () => {});
 
