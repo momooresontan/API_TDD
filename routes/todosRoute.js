@@ -18,4 +18,18 @@ router.get("/:id", function (req, res, next) {
   res.json(foundTodo);
 });
 
+router.post("/", function (req, res, next) {
+  const { body } = req;
+
+  const newTodo = {
+    id: todo.length + 1,
+    name: body.name,
+    completed: false,
+  };
+
+  todos.push(newTodo);
+
+  res.status(201).json(newTodo);
+});
+
 module.exports = router;

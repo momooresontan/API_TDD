@@ -51,6 +51,7 @@ describe("Todos API", () => {
       .then((response) => {
         expect(response.body).toEqual(
           expect.objectContaining({
+            id: expect.any(Number),
             name: "do dishes",
             completed: false,
           })
@@ -73,6 +74,7 @@ describe("Todos API", () => {
       .then((response) => {
         expect(response.body).toEqual(
           expect.objectContaining({
+            id: expect.any(Number),
             name: "do laundry",
             completed: expect.any(Boolean),
           })
