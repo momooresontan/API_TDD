@@ -37,7 +37,13 @@ router.post("/", function (req, res, next) {
 });
 
 router.patch("/:id", function (req, res) {
-  const foundTodo = todos.find((todo) => todo.id === Number(req.params.id));
+  let foundTodo = todos.find((todo) => todo.id === Number(req.params.id));
+
+  foundTodo["name"] = req.body.name;
+
+  const updatedTodo = foundTodo;
+
+  res.status(200).json(updatedTodo);
 });
 
 module.exports = router;

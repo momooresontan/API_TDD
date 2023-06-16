@@ -65,7 +65,7 @@ describe("Todos API", () => {
 
   it("PATCH /todos/:id --> updated todo", () => {
     return request(app)
-      .patch("/todos/")
+      .patch("/todos/1")
       .send({
         name: "do laundry",
       })
@@ -76,7 +76,7 @@ describe("Todos API", () => {
           expect.objectContaining({
             id: expect.any(Number),
             name: "do laundry",
-            completed: expect.any(Boolean),
+            completed: false,
           })
         );
       });
