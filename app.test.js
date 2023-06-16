@@ -79,10 +79,18 @@ describe("Todos API", () => {
   });
 
   it("PATCH /todos/:id --> validates request body", () => {
-    return request(app).patch("/todos/1");
+    return request(app).patch("/todos/1").send({ name: 123 }.expect(422));
   });
 
-  it("PATCH /todos/:id --> 404 if not found", () => {});
+  it("PATCH /todos/:id --> 404 if not found", () => {
+    return request(app).patch("todos/99999").expect(404);
+  });
 
-  it("DELETE /todos/:id --> 204 no content", () => {});
+  it("DELETE /todos/:id --> 204 no content", () => {
+    return request(app).delete("todos/1").expect(204);
+  });
+
+  it("DELETE /todos/:id --> 404 if not found", () => {
+    return request(app).delete("todos/99999").expect(404);
+  });
 });
